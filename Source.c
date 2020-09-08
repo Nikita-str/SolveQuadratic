@@ -35,7 +35,7 @@ void Test_1()
 void QuadraticInSolveOut()
     {
     Qparams Qps;
-    QuadraticIn(&Qps);
+    if(!QuadraticIn(&Qps))return;
     Qresult Qres;
     SolveQuadratic(Qps, &Qres);
     QuadraticOut(Qres);
@@ -59,7 +59,12 @@ int main()
     while (true)
         {
         char cmd;
-        scanf("%c", &cmd);
+        const int AMOUNT_IN_PARAM = 1;
+        if(scanf("%c", &cmd) != AMOUNT_IN_PARAM)
+            {
+            printf("nothing more to read from the input stream\n");
+		    break;
+            }
         switch (cmd)
             {
             case 'h': PrintHelp();  break;
