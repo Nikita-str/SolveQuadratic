@@ -83,6 +83,8 @@ void SolveQuadratic(Qparams Qps, Qresult* Qres)
     {
     assert(Qres);
     Qres->solution_amount = SolveQuadratic_help(Qps.a, Qps.b, Qps.c, &Qres->x1, &Qres->x2);
+    if(DoubleEqualZero(Qres->x1))Qres->x1 = 0;
+    if(DoubleEqualZero(Qres->x2))Qres->x2 = 0;
     }
 
 inline double QuadraticSubstitute(Qparams Qps, double x) {return Qps.a*x*x + Qps.b*x + Qps.c;}
