@@ -1,22 +1,51 @@
 #include "SolveQuadratic.h"
 #include "TestMacro.h"
-
+#include "cpp_ReadDouble.h"
 //++############[InOut]##################
+
 bool QuadraticIn(Qparams* Qps)
     {
     assert(Qps);
+    //InHelp();
     const int NUM_OF_READ_PARAM = 3;
     printf("input params:\n");
-    int check_err = scanf(" %lf%lf%lf", &Qps->a, &Qps->b, &Qps->c);
-    if (check_err != NUM_OF_READ_PARAM)
-        {
+
+    double ds[3] = {0};
+    int read = 0;
+    int ok = 0;
+    while (read != 3) {
+        ok = read_line_to_doubles(ds, 3, &read);
+        if (ok == NO_ERR) {
+            continue;
+        }
+        char *err_str = NULL;
+        switch (ok) {
+        case ERR_BAD_INPUT:
+            err_str = "input contains errors\n";
+            break;
+        case ERR_LOST_PRECISION:
+            err_str = "too long number, possible loss of precision\n";
+            break;
+        case ERR_TOO_MANY_READ:
+            err_str = "an error occurred while reading params\n";
+            break;
+        case ERR_STREAM:
+            err_str = "three numbers required, more entered\n";
+            break;
+        default:
+            err_str = "what? weird error\n";
+            break;
+        }
         #ifdef stderr
         fprintf(stderr, "an error occurred while reading params\n");
         #else 
         printf("an error occurred while reading params\n");
         #endif
         return false;
-        }
+    }
+    Qps->a = ds[0];
+    Qps->b = ds[1]; 
+    Qps->c = ds[2];
     return true;
     }
 
@@ -219,7 +248,7 @@ void QuadraticAutoTest(int amount_gen, bool success_out)
             SolveQuadratic(Qps, &Qres);
             if ((q_gen_type[i] == Q_GEN_TWO) && ((x1 < x2 && Qres.x1 > Qres.x2) || (x1 > x2 && Qres.x1 < Qres.x2)))
                 {
-                //if we have 2 solution => arrenge in order it
+                //if we have 2 solution => arrenge in order xit
                 double temp = Qres.x1;
                 Qres.x1 = Qres.x2;
                 Qres.x2 = temp;
