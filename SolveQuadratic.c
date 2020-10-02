@@ -26,10 +26,10 @@ bool QuadraticIn(Qparams* Qps)
         case ERR_LOST_PRECISION:
             err_str = "too long number, possible loss of precision\n";
             break;
-        case ERR_TOO_MANY_READ:
+        case ERR_STREAM:
             err_str = "an error occurred while reading params\n";
             break;
-        case ERR_STREAM:
+        case ERR_TOO_MANY_READ:
             err_str = "three numbers required, more entered\n";
             break;
         default:
