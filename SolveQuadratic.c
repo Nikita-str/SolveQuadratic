@@ -37,9 +37,9 @@ bool QuadraticIn(Qparams* Qps)
             break;
         }
         #ifdef stderr
-        fprintf(stderr, "an error occurred while reading params\n");
+        fprintf(stderr, err_str);
         #else 
-        printf("an error occurred while reading params\n");
+        printf(err_str);
         #endif
         return false;
     }
